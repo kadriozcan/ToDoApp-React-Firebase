@@ -6,7 +6,7 @@ const style = {
 }
 
 function App() {
-  const [todos, setTodos] = useState(["Lear react", "learn js"])
+  const [todos, setTodos] = useState(["Learn react", "learn js"])
 
 //selam
   return (
