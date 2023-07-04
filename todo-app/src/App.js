@@ -8,7 +8,7 @@ const style = {
 function App() {
   const [todos, setTodos] = useState(["Lear react", "learn js"])
 
-
+//selam
   return (
     <div className={style.bg}>
       <div className={style.container}>
