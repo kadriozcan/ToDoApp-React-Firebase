@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import {BsPlusCircleFill} from 'react-icons/bs'
+import React, { useState, useEffect } from 'react'
+import { BsPlusCircleFill } from 'react-icons/bs'
 import Todo from './Todo'
-import {db} from './firebase'
-import { collection, query, onSnapshot, updateDoc, doc } from "firebase/firestore";
+import { db } from './firebase'
+import { collection, query, onSnapshot, updateDoc, doc, addDoc } from "firebase/firestore";
 const style = {
   // make the background filling all the screen
   bg: `bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 h-screen`,
@@ -16,44 +16,61 @@ const style = {
 
 function App() {
   const [todos, setTodos] = useState([/*"Learn React", "Learn Js", "Grind Leetcode", "Learn Algorithms", "Learn Data Structure"*/])
+  const [input, setInput] = useState('')
 
-//create todo
-//read todo
-useEffect(() => {
-  const q = query(collection(db, 'todos')/*, orderBy("timestamp", "desc")*/)
-  const unsubscribe = onSnapshot(q,(querySnapshot) => {
-    let todosArr = [] 
-    querySnapshot.forEach((doc) => {
-      todosArr.push({...doc.data(), id: doc.id})
-    });
-    setTodos(todosArr)
-  })
-  return () => unsubscribe()
-}, [])
+  //create todo
+  const createTodo = async (e) => {
+    e.preventDefault()
+    if (input === ''){ 
+      alert ('Please enter a todo')
+      return
+    }
+    await addDoc(collection(db, 'todos'), {
+      text : input,
+      Done : false,
+    })
+    setInput('')
+  }
 
-//update todo
-const toggleDone = async(todo) => {
-  await updateDoc(doc(db, 'todos', todo.id),{
-    Done: !todo.Done
-  })
-}
-//delete todo
+  //read todo
+  useEffect(() => {
+    const q = query(collection(db, 'todos')/*, orderBy("timestamp", "desc")*/)
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let todosArr = []
+      querySnapshot.forEach((doc) => {
+        todosArr.push({ ...doc.data(), id: doc.id })
+      });
+      setTodos(todosArr)
+    })
+    return () => unsubscribe()
+  }, [])
+
+
+  //update todo
+  const toggleDone = async (todo) => {
+    await updateDoc(doc(db, 'todos', todo.id), {
+      Done: !todo.Done
+    })
+  }
+
+
+  //delete todo
 
 
   return (
     <div className={style.bg}>
       <div className={style.container}>
         <h3 className={style.heading}>ToDo List</h3>
-        <form className={style.form}>
-          <input className={style.input} type="text" placeholder='Add ToDo' />
-          <button className={style.button}>{<BsPlusCircleFill size={25}/>}</button>
+        <form onSubmit={createTodo} className={style.form}>
+          <input value={input} onChange={(e) => setInput(e.target.value)} className={style.input} type="text" placeholder='Add ToDo' />
+          <button className={style.button}>{<BsPlusCircleFill size={25} />}</button>
         </form>
         <ul>
           {todos.map((todo, index) => (
-            <Todo key={index} todo={todo} toggleDone={toggleDone}/>
+            <Todo key={index} todo={todo} toggleDone={toggleDone} />
           ))}
         </ul>
-        <p className={style.count}> You have x number of Todos</p>
+        <p className={style.count}> {`You have ${todos.length} todos`}</p>
       </div>
     </div>
   );
