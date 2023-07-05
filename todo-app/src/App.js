@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BsPlusCircleFill } from 'react-icons/bs'
 import Todo from './Todo'
 import { db } from './firebase'
-import { collection, query, onSnapshot, updateDoc, doc, addDoc } from "firebase/firestore";
+import { collection, query, onSnapshot, updateDoc, doc, addDoc, deleteDoc } from "firebase/firestore";
 const style = {
   // make the background filling all the screen
   bg: `bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 h-screen`,
@@ -32,6 +32,7 @@ function App() {
     setInput('')
   }
 
+
   //read todo
   useEffect(() => {
     const q = query(collection(db, 'todos')/*, orderBy("timestamp", "desc")*/)
@@ -55,6 +56,9 @@ function App() {
 
 
   //delete todo
+  const deleteTodo = async (id) => {
+    await deleteDoc(doc(db, 'todos', id))
+  }
 
 
   return (
@@ -67,7 +71,7 @@ function App() {
         </form>
         <ul>
           {todos.map((todo, index) => (
-            <Todo key={index} todo={todo} toggleDone={toggleDone} />
+            <Todo key={index} todo={todo} toggleDone={toggleDone} deleteTodo={deleteTodo} />
           ))}
         </ul>
         <p className={style.count}> {`You have ${todos.length} todos`}</p>
