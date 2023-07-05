@@ -13,12 +13,12 @@ const style={
 
 }
 
-const Todo = ({todo}) => {
+const Todo = ({todo, toggleDone}) => {
   return (
     <li className={todo.Done ? style.liDone : style.li}>
         <div className={style.row}>
-            <input type="checkbox" checked= {todo.Done ? 'checked':''}/>
-            <p className={todo.Done ? style.textDone : style.text}>{todo.text}</p>
+            <input onChange={()=> toggleDone(todo)} type="checkbox" checked= {todo.Done ? 'checked':''}/>
+            <p onClick={()=>toggleDone(todo)} className={todo.Done ? style.textDone : style.text}>{todo.text}</p>
         </div>
         <button>{<FaRegTrashAlt/>}</button>
     </li>
