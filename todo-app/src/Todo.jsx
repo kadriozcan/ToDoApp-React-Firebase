@@ -15,10 +15,10 @@ const style={
 
 const Todo = ({todo}) => {
   return (
-    <li className={style.li}>
+    <li className={todo.Done ? style.liDone : style.li}>
         <div className={style.row}>
-            <input type="checkbox" />
-            <p className={style.text}>{todo}</p>
+            <input type="checkbox" checked= {todo.Done ? 'checked':''}/>
+            <p className={todo.Done ? style.textDone : style.text}>{todo.text}</p>
         </div>
         <button>{<FaRegTrashAlt/>}</button>
     </li>

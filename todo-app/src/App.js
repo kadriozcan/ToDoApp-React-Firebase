@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {BsPlusCircleFill} from 'react-icons/bs'
 import Todo from './Todo'
+import {db} from './firebase'
+import { collection, query, onSnapshot } from "firebase/firestore";
 const style = {
   // make the background filling all the screen
   bg: `bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 h-screen`,
@@ -13,9 +15,26 @@ const style = {
 }
 
 function App() {
-  const [todos, setTodos] = useState(["Learn React", "Learn Js", "Grind Leetcode", "Learn Algorithms", "Learn Data Structure"])
+  const [todos, setTodos] = useState([/*"Learn React", "Learn Js", "Grind Leetcode", "Learn Algorithms", "Learn Data Structure"*/])
 
-//selam
+//create todo
+//read todo
+useEffect(() => {
+  const q = query(collection(db, 'todos')/*, orderBy("timestamp", "desc")*/)
+  const unsubscribe = onSnapshot(q,(querySnapshot) => {
+    let todosArr = [] 
+    querySnapshot.forEach((doc) => {
+      todosArr.push({...doc.data(), id: doc.id})
+    });
+    setTodos(todosArr)
+  })
+  return () => unsubscribe()
+}, [])
+
+//update todo
+//delete todo
+
+
   return (
     <div className={style.bg}>
       <div className={style.container}>
