@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import {BsPlusCircleFill} from 'react-icons/bs'
 import Todo from './Todo'
 const style = {
-  bg: `bg-gradient-to-r from-purple-400 via-pink-500 to-red-500`,
+  // make the background filling all the screen
+  bg: `bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 h-screen`,
   form: `flex justify-center items-center border-b-2 border-purple-500 py-2`,
   input: `w-3/4 py-2 px-4 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent`,
   container: `bg-white bg-opacity-50 rounded-lg shadow-lg py-10 px-5 w-1/2 mx-auto`,
