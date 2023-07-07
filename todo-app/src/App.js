@@ -14,6 +14,7 @@ const style = {
   count: `text-center text-xl font-bold text-gray-800 p-5`
 }
 
+//selam
 function App() {
   const [todos, setTodos] = useState([/*"Learn React", "Learn Js", "Grind Leetcode", "Learn Algorithms", "Learn Data Structure"*/])
   const [input, setInput] = useState('')
