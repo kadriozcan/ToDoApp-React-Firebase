@@ -78,8 +78,10 @@ function App() {
           ))}
         </ul>
         <p className={style.count}>
-          {`I have ${todosLeft} todos left`}
-          {todosDone > 0 ? ` and ${todosDone} todos done congrats`: ''}
+          {todosLeft > 0 ? 
+            `I have ${todosLeft} todos left${todosDone > 0 ? ` and ${todosDone} todos done, congrats` : ''}` : 
+            (todosDone > 0 ? 'You have done everything, congrats!' : 'Add some todos to get started!')
+          }
         </p>
       </div>
     </div>
