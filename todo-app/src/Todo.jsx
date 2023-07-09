@@ -5,7 +5,7 @@ const style={
     
     // put one space after checkbox
     li: `flex justify-between bg-white p-3 my-8 border border-gray-300 rounded hover:opacity-80`,
-    liDone: `flex justify-between bg-white p-2 my-2 border border-gray-300 rounded opacity-50`,
+    liDone: `flex justify-between bg-white p-2 my-2 border border-gray-300 rounded opacity-50 hover:opacity-80`,
     row:`flex`,
     text:`margin-left: 150px;`,
     textDone:`margin-left: 10px; text-decoration: line-through;`,

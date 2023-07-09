@@ -60,8 +60,8 @@ function App() {
   const deleteTodo = async (id) => {
     await deleteDoc(doc(db, 'todos', id))
   }
-
-
+  const todosLeft = todos.filter(todo => !todo.Done).length;
+  const todosDone = todos.filter(todo => todo.Done).length;
 
   // Update todo in firebase
   return (
@@ -77,7 +77,10 @@ function App() {
             <Todo key={index} todo={todo} toggleDone={toggleDone} deleteTodo={deleteTodo} />
           ))}
         </ul>
-        <p className={style.count}>{`I have ${todos.filter(todo => !todo.Done).length} todos left`}</p>
+        <p className={style.count}>
+          {`I have ${todosLeft} todos left`}
+          {todosDone > 0 ? ` and ${todosDone} todos done congrats`: ''}
+        </p>
       </div>
     </div>
   );
