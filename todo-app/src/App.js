@@ -62,8 +62,8 @@ function App() {
   }
 
 
+
   // Update todo in firebase
-  // Delete todo
   return (
     <div className={style.bg}>
       <div className={style.container}>
@@ -77,7 +77,7 @@ function App() {
             <Todo key={index} todo={todo} toggleDone={toggleDone} deleteTodo={deleteTodo} />
           ))}
         </ul>
-        <p className={style.count}> {`You have ${todos.length} todos`}</p>
+        <p className={style.count}>{`I have ${todos.filter(todo => !todo.Done).length} todos left`}</p>
       </div>
     </div>
   );
