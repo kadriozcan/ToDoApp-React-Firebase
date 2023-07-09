@@ -19,7 +19,7 @@ function App() {
   const [todos, setTodos] = useState([/*"Learn React", "Learn Js", "Grind Leetcode", "Learn Algorithms", "Learn Data Structure"*/])
   const [input, setInput] = useState('')
 
-  //create todo
+  //create todos
   const createTodo = async (e) => {
     e.preventDefault()
     if (input === ''){ 
