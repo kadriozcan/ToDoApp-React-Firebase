@@ -2,11 +2,12 @@ import React from 'react'
 import {FaRegTrashAlt} from 'react-icons/fa'
 
 const style={
-    li:`justify-content: space-between bg-white p-2 my-2 d-flex align-items-center border border-1 border-secondary rounded`,
-    //make the complete ones more transparent
-    liDone:` justify-content: space-between bg-white p-2 my-2 d-flex align-items-center border border-1 border-secondary rounded opacity-50`,
-    row:`display: flex;`,
-    text:`margin-left: 10px;`,
+    
+    // put one space after checkbox
+    li: `flex justify-between bg-white p-3 my-8 border border-gray-300 rounded hover:opacity-80`,
+    liDone: `flex justify-between bg-white p-2 my-2 border border-gray-300 rounded opacity-50`,
+    row:`flex`,
+    text:`margin-left: 150px;`,
     textDone:`margin-left: 10px; text-decoration: line-through;`,
     button:`background: none; border: none; cursor: pointer;`,
 
