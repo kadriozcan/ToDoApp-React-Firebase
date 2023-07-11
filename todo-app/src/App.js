@@ -40,7 +40,12 @@ function App() {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let todosArr = []
       querySnapshot.forEach((doc) => {
-        todosArr.push({ ...doc.data(), id: doc.id })
+        
+        const todoData = doc.data();
+        
+        const todoWithDate = {...todoData, id: doc.id};
+      //todosArr.push({ ...doc.data(), id: doc.id })
+      todosArr.push(todoWithDate);
       });
       setTodos(todosArr)
     })
@@ -60,6 +65,10 @@ function App() {
   const deleteTodo = async (id) => {
     await deleteDoc(doc(db, 'todos', id))
   }
+  const getIncompleteTodoCount = (todos) => {
+    const incompleteTodos = todos.filter(todo => !todo.Done);
+    return incompleteTodos.length;
+  };
 
 
   // Update todo in firebase
@@ -77,7 +86,7 @@ function App() {
             <Todo key={index} todo={todo} toggleDone={toggleDone} deleteTodo={deleteTodo} />
           ))}
         </ul>
-        <p className={style.count}> {`You have ${todos.length} todos`}</p>
+        <p className={style.count}> {`You have ${getIncompleteTodoCount(todos)} todos`}</p>
       </div>
     </div>
   );
